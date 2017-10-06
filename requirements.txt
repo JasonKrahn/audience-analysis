@@ -1,0 +1,5 @@
+requests==2.18.4
+Flask==0.12.2
+pyyaml>=3.0
+azure
+azure-servicebus
