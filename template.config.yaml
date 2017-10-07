@@ -1,11 +1,12 @@
 cognitive_services:
-  subscription_key: b40cd56a48c244f4b838488c0dda6eff
+  subscription_key: <your key>
   faceapi_uri: westeurope.api.cognitive.microsoft.com
 event_hubs:
-  policy_secret: p+tHO7C9mjGiB6+PY9iAJf9qwjhaFhHeK9QpX2vkNIA=
+  policy_secret: <primary key of event hub>
   namespace: audience-analysis
   policy_name: RootManageSharedAccessKey
-  hub_name: session-feed
+  hub_name: <event hub name>
+
 app:
   log_level:  DEBUG
   max_sessions: 8
