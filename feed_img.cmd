@@ -1,1 +1,1 @@
-curl -H "Content-type: application/octet-stream" -X POST localhost:5555 --data-binary @img/multiple-faces.jpg
+curl -H "Content-type: application/octet-stream" -H "SESSIONID: blabla9" -X POST localhost:5555 --data-binary @img/multiple-faces.jpg

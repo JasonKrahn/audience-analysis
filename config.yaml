@@ -8,3 +8,4 @@ event_hubs:
   hub_name: session-feed
 app:
   log_level:  DEBUG
+  max_sessions: 8
