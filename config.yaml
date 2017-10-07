@@ -6,3 +6,5 @@ event_hubs:
   namespace: audience-analysis
   policy_name: RootManageSharedAccessKey
   hub_name: session-feed
+app:
+  log_level:  DEBUG

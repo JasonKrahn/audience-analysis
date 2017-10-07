@@ -8,8 +8,9 @@ import requests
 import logging
 import yaml
 from azure.servicebus import ServiceBusService
+import util
 
-
+import pickle
 
 log = logging.getLogger()
 with open('config.yaml', 'r') as f: conf = yaml.load(f)
@@ -21,6 +22,10 @@ app = Flask(__name__, static_url_path='/static')
 # Make the WSGI interface available at the top level so wfastcgi can get it.
 wsgi_app = app.wsgi_app
 sbs = ServiceBusService(event_hub_conf["namespace"], shared_access_key_name=event_hub_conf["policy_name"], shared_access_key_value=event_hub_conf["policy_secret"])
+
+# two in-memory structures to maintain last faceAttr and last JPEG
+sessionLastFaceAttr = {}
+sessionLastJPEG = {}
 
 @app.route('/',methods=['GET', 'POST'])
 def process_image():
@@ -42,12 +47,26 @@ def process_image():
 
         r = requests.post(url, params = params, headers = headers, data = request.data)
 
+        ret = util.get_agg_face_attrs(r.json())
 
-        sbs.send_event(event_hub_conf['hub_name'], '{ "DeviceId":"deviceId1", "Temperature":"10.0" }')
+        sbs.send_event(event_hub_conf['hub_name'], json.dumps(ret))
 
+        #save file for testing purposes
+        #with open("test_json.pkl", "w") as f:
+        #    json.dump(r.json(), f)
+        sess_id = request.headers['SESSIONID']
 
+        #Updating the session metadata dictionary
+        sessionLastFaceAttr[sess_id] = r.json()
+        sessionLastJPEG[sess_id] = request.data
 
-        return Response(json.dumps(r.json()), status=200, mimetype='application/json')
+        #Updating last session image
+
+        resp = {"status":200,
+                "message":"Success"
+        }
+
+        return Response(jsonify(resp), status=200, mimetype='application/json')
 
     else:
         msg = {"status": 400,
