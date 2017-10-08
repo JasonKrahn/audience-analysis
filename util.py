@@ -1,7 +1,7 @@
 import json
 import logging
 import collections
-
+from flask import jsonify
 
 log = logging.getLogger()
 
@@ -37,6 +37,13 @@ def get_agg_face_attrs(js):
 
     return returnDict
 
+def bad_message(msg):
+    msg = {"status": 400,
+            "message": msg
+            }
+    resp = jsonify(msg)
+    resp.status_code = 400
+    return resp
 
 if __name__ == "__main__":
     import yaml, sys, pickle

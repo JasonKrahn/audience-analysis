@@ -13,6 +13,8 @@ import util
 import pickle
 from collections import deque
 
+
+
 log = logging.getLogger()
 with open('config.yaml', 'r') as f: conf = yaml.load(f)
 cognitive_conf = conf['cognitive_services']
@@ -35,6 +37,8 @@ def process_image():
     #url = "https://hookb.in/vaP0en5Y"
     #url = "https://requestb.in/10yi8601"
     subscription_key = cognitive_conf['subscription_key']
+    sess_id = request.headers['SESSIONID']
+
     if request.headers['Content-Type'] == 'application/octet-stream':
         headers = {'Content-Type': 'application/octet-stream',
                     'Ocp-Apim-Subscription-Key': subscription_key}
@@ -49,6 +53,7 @@ def process_image():
         r = requests.post(url, params = params, headers = headers, data = request.data)
 
         ret = util.get_agg_face_attrs(r.json())
+        ret['session_id'] = sess_id
 
         sbs.send_event(event_hub_conf['hub_name'], json.dumps(ret))
 
@@ -57,7 +62,6 @@ def process_image():
         #    json.dump(r.json(), f)
 
         #Updating the session metadata and last JPEG
-        sess_id = request.headers['SESSIONID']
         resp = {}
         resp['SESSIONID'] = sess_id
         resp['faceAttributes'] = r.json()
@@ -69,12 +73,7 @@ def process_image():
         return Response(json.dumps({"message":"Success"}), status=200, mimetype='application/json')
 
     else:
-        msg = {"status": 400,
-                "message": "Wrong content type, only octet-stream is supported"
-                }
-        resp = jsonify(msg)
-        resp.status_code = 400
-        return resp
+        return util.bad_message("Wrong content type, only octet-stream is supported")
 
 @app.route('/sessions',methods=['GET'])
 def get_sessions():
@@ -82,19 +81,12 @@ def get_sessions():
     resp.status_code = 200
     return resp
 
-
 @app.route('/session-jpeg/<session_id>',methods=['GET'])
 def get_session_jpeg(session_id):
     if session_id in sessionLastJPEG:
         return Response(sessionLastJPEG[session_id], status=200, mimetype="application/octet-stream")
     else:
-        msg = {"status": 400,
-                "message": "no such session"
-                }
-        resp = jsonify(msg)
-        resp.status_code = 400
-
-        return resp
+        return util.bad_message("no such session")
 
 
 if __name__ == '__main__':
