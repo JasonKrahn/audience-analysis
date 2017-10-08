@@ -1,12 +1,23 @@
 cognitive_services:
-  subscription_key: <your key>
+  subscription_key: <key>
   faceapi_uri: westeurope.api.cognitive.microsoft.com
 event_hubs:
-  policy_secret: <primary key of event hub>
+  policy_secret: <secret>
   namespace: audience-analysis
   policy_name: RootManageSharedAccessKey
-  hub_name: <event hub name>
+  #hub_name: session-feed
+  hub_name: faces-attr-counts
 
 app:
+  server_host: 0.0.0.0
+  server_port: 5555
   log_level:  DEBUG
   max_sessions: 8
+
+web_app:
+  sku: B1
+  region: northeurope
+  app_name: aa-backend
+  container_name: vykhand/aa-backend:latest
+  resource_group: aa-backend
+  plan_name:  aa-backend-plan
