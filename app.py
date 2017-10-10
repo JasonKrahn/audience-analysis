@@ -4,6 +4,7 @@ import os
 import sys
 import json
 from flask import Flask, request, Response, jsonify
+from flask_cors import CORS
 import requests
 import logging
 import yaml
@@ -17,6 +18,7 @@ from collections import deque
 log = logging.getLogger()
 
 app = Flask(__name__, static_url_path="/static")
+CORS(app)
 
 # Make the WSGI interface available at the top level so wfastcgi can get it.
 wsgi_app = app.wsgi_app
@@ -46,9 +48,15 @@ def process_image():
         }
 
         r = requests.post(url, params = params, headers = headers, data = request.data)
+        log.debug(str(r.json()) )
 
-        ret = u.get_agg_face_attrs(r.json())
+        try:
+            ret = u.get_agg_face_attrs(r.json())
+        except AttributeError:
+            log.error("Face Api returned unexpected response")
+            return u.bad_message("Face API returned unexpected response")
         ret["session_id"] = sess_id
+        log.debug("Sending response to the event hub: " + str(ret))
 
         sbs.send_event(u.get_setting("event_hubs","hub_name"), json.dumps(ret))
 
@@ -63,7 +71,6 @@ def process_image():
         sessionLastFaceAttr.appendleft(resp)
         sessionLastJPEG[sess_id] = request.data
 
-        log.debug(json.dumps(ret))
 
         return Response(json.dumps({"message":"Success"}), status=200, mimetype="application/json")
 

@@ -13,6 +13,8 @@ try:
 except FileNotFoundError:
     log.warning("Config file not fould, going with env vars")
 
+EMPTY_RESPONSE = {'num_faces':0, 'smile': 0.0, 'age': 0, 'males': 0, 'females': 0, 'anger': 0.0, 'contempt': 0.0, 'disgust': 0.0, 'fear': 0.0, 'happiness': 0.0, 'neutral': 0.0, 'sadness': 0.0, 'surprise': 0.0}
+
 def get_setting(category, setting_name):
     '''
     returns a setting either from config.yaml of from local environment.\
@@ -41,6 +43,12 @@ def get_agg_face_attrs(js):
     '''
     TODO: figure out how to reduce code here
     '''
+
+    #handling no face situation
+    if js == []:
+        log.info("No face. returning empty response")
+        return EMPTY_RESPONSE
+
     faces = 0
     sumFaceAttr = collections.Counter()
     sumEmotionAttr = collections.Counter()
@@ -48,7 +56,7 @@ def get_agg_face_attrs(js):
     returnDict = {}
 
     for i in js:
-    # now song is a dictionary
+    #transform json
         for k, v in i.items():
             log.debug(str(k) + ":" + str(v))
             if k == "faceId":
