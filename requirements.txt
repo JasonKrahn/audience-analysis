@@ -4,3 +4,4 @@ pyyaml>=3.0
 azure-servicebus>=0.21.1
 flask-cors>=3.0.3
 pillow>=4.2.1
+redis>=2.10.6

@@ -5,6 +5,8 @@ import operator
 import logging
 log = logging.getLogger()
 
+
+
 def rectangle(draw, coords, fill, width = 1):
     '''
     expects a list [x0,y0, x1,y1]
@@ -84,7 +86,7 @@ if __name__ == '__main__':
         faces = json.load(f)
     #log.debug(str(faces))
     im = paint_boxes(img, faces)
-    im = resize_img(im, (200,200))
+    im = resize_img(im, (200,500))
     im = Image.open(io.BytesIO(im))
     im.show()
 

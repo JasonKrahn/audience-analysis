@@ -7,8 +7,9 @@ from flask import Flask, request, Response, jsonify
 from flask_cors import CORS
 import requests
 import logging
-import yaml
-import util as u
+import aa_backend.util as u
+import aa_backend.messaging as msg
+import aa_backend.caching as cache
 
 import pickle
 from collections import deque
@@ -22,7 +23,12 @@ CORS(app)
 
 # Make the WSGI interface available at the top level so wfastcgi can get it.
 wsgi_app = app.wsgi_app
-sbs = u.get_ehub()
+
+# messaging and caching
+sbs = msg.get_ehub()
+redis_cache = cache.RedisCache()
+
+
 # two in-memory structures to maintain last faceAttr and last JPEG
 sessionLastFaceAttr = deque(maxlen = int(u.get_setting("app","max_sessions")))
 sessionLastJPEG = {}
@@ -60,8 +66,11 @@ def process_image():
 
         sbs.send_event(u.get_setting("event_hubs","hub_name"), json.dumps(ret))
 
+        # caching thumbnail to redis
+        redis_cache.cache_thumbnail(sess_id, request.data, r.json())
+
         #save file for testing purposes
-        #with open("test_json.pkl", "w") as f:
+        #with open("test_json.json", "w") as f:
         #    json.dump(r.json(), f)
 
         #Updating the session metadata and last JPEG

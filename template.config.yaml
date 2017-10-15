@@ -1,8 +1,9 @@
 cognitive_services:
-  subscription_key: <key>
+  subscription_key: <faceapi_key>
   faceapi_uri: westeurope.api.cognitive.microsoft.com
+  
 event_hubs:
-  policy_secret: <secret>
+  policy_secret: <hub_key>
   namespace: audience-analysis
   policy_name: RootManageSharedAccessKey
   #hub_name: session-feed
@@ -13,6 +14,8 @@ app:
   server_port: 5555
   log_level:  DEBUG
   max_sessions: 8
+  resize_x: 200
+  resize_y: 200
 
 web_app:
   sku: B1
@@ -21,3 +24,10 @@ web_app:
   container_name: vykhand/aa-backend:latest
   resource_group: aa-backend
   plan_name:  aa-backend-plan
+
+redis:
+  key:  <rediskey>
+  host: aa-backend-cache.redis.cache.windows.net
+  expire_sec: 3600 
+
+cosmosdb:
