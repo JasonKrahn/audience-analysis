@@ -1,3 +1,4 @@
+#!python
 import sys, logging
 log = logging.getLogger()
 

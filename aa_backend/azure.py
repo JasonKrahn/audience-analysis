@@ -1,6 +1,6 @@
 import logging
 log = logging.getLogger()
-from util import conf, set_env
+from aa_backend.util import conf, set_env
 import subprocess
 
 def get_create_plan_cmd(settings):

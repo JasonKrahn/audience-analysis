@@ -18,10 +18,14 @@ class RedisCache(object):
 
     def cache_thumbnail(self, sess_id, img, faces):
         r = self._thumbdb
-        size = (get_setting("app","resize_x"), get_setting("app","resize_y"))
+        size = (int(get_setting("app","resize_x")), int(get_setting("app","resize_y")))
         im = paint_boxes(img, faces)
         im = resize_img(im, size)
         r.set(sess_id, im, ex = self._expire)
+    
+    def cache_img(self, sess_id, img):
+        r  = self._thumbdb
+        r.set(sess_id, img, ex = self._expire)
 
     def cache_session(self, sess_id):
         r = self._sessdb

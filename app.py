@@ -66,9 +66,12 @@ def process_image():
 
         sbs.send_event(u.get_setting("event_hubs","hub_name"), json.dumps(ret))
 
-        # caching thumbnail to redis
-        redis_cache.cache_thumbnail(sess_id = sess_id, img = request.data, faces = r.json())
-        redis_cache.cache_session(sess_id)
+        if "FULL_IMG" in request.headers:
+            redis_cache.cache_img(sess_id, request.data)
+        else:
+            # caching thumbnail to redis
+            redis_cache.cache_thumbnail(sess_id = sess_id, img = request.data, faces = r.json())
+            redis_cache.cache_session(sess_id)
 
 
         #save file for testing purposes

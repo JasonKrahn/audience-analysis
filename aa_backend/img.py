@@ -26,11 +26,17 @@ def paint_boxes(img, faces):
     takes a jpeg image and face json in Azure face API format
     returns an image with painted boxes and added captions
     '''
+    if faces == []:
+        log.info("No faces. returning original image")
+        return img
+
     im = Image.open(io.BytesIO(img))
     draw = ImageDraw.Draw(im)
     width, height = im.size
     log.debug("Image width: {} height {}".format(width,height))
-
+    
+    ret = io.BytesIO()
+    
     for f in faces:
         
         log.debug("Operating on face entry:\n {}".format(f))
@@ -59,7 +65,6 @@ def paint_boxes(img, faces):
         draw.text([coords[0]+4,coords[1]+2], caption_topbot, font = font, fill = "blue")
         draw.text([coords[0]+4,coords[3]-11], caption_bot, font = font, fill = "blue")
 
-        ret = io.BytesIO()
         im.save(ret, "JPEG")
     return ret.getvalue()
 
