@@ -4,6 +4,7 @@ log = logging.getLogger()
 
 import aa_backend.manage as mng
 import aa_backend.azure as az
+from aa_backend.caching import RedisCache
 
 from aa_backend.util import get_setting
 
@@ -19,5 +20,8 @@ if __name__ == "__main__":
         az.delete_webapp()
     elif sys.argv[1] == "setenv":
         az.set_env()
+    elif sys.argv[1] == "flush_redis":
+        r = RedisCache()
+        r.flushall()
     else:
-        print("Usage: python util.py run_docker|create_app|delete_app|setenv [-d|--dry]")
+        print("Usage: python util.py run_docker|create_app|delete_app|setenv|flush_redis [-d|--dry]")
