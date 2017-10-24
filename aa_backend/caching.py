@@ -40,8 +40,10 @@ class RedisCache(object):
         r.hmset(sess_id, detail_dict)
 
     def get_sessions(self):
-        return self._sessdb.zrange("sessions", 0, int(get_setting("app", "max_sessions")) - 1,
-                                     desc = True)
+        sessions  = self._sessdb.zrange("sessions", 0, int(get_setting("app", "max_sessions")) - 1,
+                                            desc = True)
+        ret = [s for s in sessions if self._thumbdb.exists(s)]
+        return ret
 
     def get_session_detail(self, sess_id):
         return self._sessdb.hgetall(sess_id)
