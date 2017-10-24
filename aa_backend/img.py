@@ -17,6 +17,7 @@ def rectangle(draw, coords, fill, width = 1):
     draw.line([x1,y0, x1, y1], fill, width)
     draw.line([x1,y1, x0, y1], fill, width)
     draw.line([x0,y1, x0, y0], fill, width)
+    log.debug("Drawing rectangle: %d %d %d %d" % tuple(coords))
 
     return draw
 
@@ -34,8 +35,6 @@ def paint_boxes(img, faces):
     draw = ImageDraw.Draw(im)
     width, height = im.size
     log.debug("Image width: {} height {}".format(width,height))
-    
-    ret = io.BytesIO()
     
     for f in faces:
         
@@ -64,7 +63,8 @@ def paint_boxes(img, faces):
 
         draw.text([coords[0]+4,coords[1]+2], caption_topbot, font = font, fill = "blue")
         draw.text([coords[0]+4,coords[3]-11], caption_bot, font = font, fill = "blue")
-
+        
+        ret = io.BytesIO()
         im.save(ret, "JPEG")
     return ret.getvalue()
 
