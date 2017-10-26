@@ -116,6 +116,14 @@ def get_session_jpeg(session_id):
         return u.bad_message("no such session")
  '''
 
+# No cacheing at all for API endpoints.
+@app.after_request
+def add_header(response):
+    # response.cache_control.no_store = True
+    if 'Cache-Control' not in response.headers:
+        response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+        response.headers['Pragma'] = 'no-cache'
+    return response
 
 if __name__ == "__main__":
     log.setLevel(logging.DEBUG)
