@@ -1,0 +1,29 @@
+SELECT System.Timestamp as ts,
+       SUM(num_faces)/COUNT(DISTINCT EventEnqueuedUtcTime) as num_faces,
+       SUM(age)/SUM(num_faces) as avg_age,
+       SUM(anger)/SUM(num_faces) as anger,
+       SUM(contempt)/SUM(num_faces)  as contempt,
+       SUM(disgust)/SUM(num_faces) as disgust,
+       SUM(fear)/SUM(num_faces)  as fear,
+       SUM(happiness)/SUM(num_faces) as happiness,
+       SUM(neutral)/SUM(num_faces)  as neutral,
+       SUM(surprise)/SUM(num_faces)  as surprise,
+       SUM(smile)/SUM(num_faces) as smile,
+       SUM(males)/COUNT(DISTINCT EventEnqueuedUtcTime) as males,
+       SUM(females)/COUNT(DISTINCT EventEnqueuedUtcTime) as females,
+       COUNT(DISTINCT session_id) as num_sessions
+INTO [out-powerbi]
+FROM [stream-faceattr]
+--TIMESTAMP BY EventEnqueuedUtcTime
+GROUP BY TUMBLINGWINDOW(Duration(second, 30))
+
+SELECT *
+INTO [out-cosmos-sess-hist]
+FROM [stream-faceattr]
+--TIMESTAMP BY EventEnqueuedUtcTime
+where num_faces > 0
+
+SELECT *
+INTO [out-cosmos-sessions]
+FROM [stream-faceattr]
+--TIMESTAMP BY EventEnqueuedUtcTime
