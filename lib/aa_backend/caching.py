@@ -1,6 +1,6 @@
 import redis
-from aa_backend.util import get_setting
-from aa_backend.img import paint_boxes, resize_img
+from .util import get_setting
+from .img import paint_boxes, resize_img
 import time
 
 THUMBNAIL_DB = 0

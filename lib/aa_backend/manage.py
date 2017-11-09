@@ -1,6 +1,6 @@
 import logging
 log = logging.getLogger()
-from aa_backend.util import set_env, conf
+from .util import set_env, conf
 from itertools import chain
 import subprocess, os
 

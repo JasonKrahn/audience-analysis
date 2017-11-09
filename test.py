@@ -1,20 +1,10 @@
-from aa_backend.caching import RedisCache
-
+from pypbi.core import PowerBI
+from aa_backend import util as u
 if __name__ == '__main__':
 
-    r = RedisCache()
+    p = PowerBI(u.get_setting("powerbi", "user_name"),
+                u.get_setting("powerbi", "password"),
+                u.get_setting("powerbi", "client_id"))
+    p.connect()
 
-    r._sessdb.flushall()
-    r.cache_session("sess1")
-    r.cache_session("sess2")
-    r.cache_session("sess3")
-    r.cache_session("sess4")
-    r.cache_session("sess5")
-    r.cache_session("sess6")
-    r.cache_session("sess7")
-    r.cache_session("sess8")
-    r.cache_session("sess9")
-    r.cache_session("sess10")
-    print(r.get_sessions())
-
-
+    print(list(p.get_workspaces()))

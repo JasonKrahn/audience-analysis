@@ -1,4 +1,4 @@
-from aa_backend.util import get_setting
+from .util import get_setting
 from azure.servicebus import ServiceBusService
 
 def get_ehub():

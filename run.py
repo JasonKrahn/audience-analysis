@@ -1,5 +1,8 @@
 #!python
 import sys, logging
+sys.path.append("./lib")
+sys.path.append("./submodules")
+
 log = logging.getLogger()
 
 import aa_backend.manage as mng

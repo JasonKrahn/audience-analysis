@@ -7,6 +7,9 @@ from flask import Flask, request, Response, jsonify
 from flask_cors import CORS
 import requests
 import logging
+sys.path.append("./lib")
+sys.path.append("./submodules")
+
 import aa_backend.util as u
 import aa_backend.messaging as msg
 import aa_backend.caching as cache
