@@ -1,0 +1,3 @@
+[submodule "submodules/pypbi"]
+	path = submodules/pypbi
+	url = https://github.com/vykhand/pypbi
