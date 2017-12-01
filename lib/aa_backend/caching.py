@@ -45,6 +45,9 @@ class RedisCache(object):
         ret = [s for s in sessions if self._thumbdb.exists(s)]
         return ret
 
+    def get_session_count(self):
+        return self._sessdb.zcount("sessions", "-inf", "+inf")
+
     def get_session_detail(self, sess_id):
         return self._sessdb.hgetall(sess_id)
 

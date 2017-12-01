@@ -1,7 +1,7 @@
 #!python
 import sys, logging
 sys.path.append("./lib")
-sys.path.append("./submodules")
+sys.path.append("./submodules/pypbi")
 
 log = logging.getLogger()
 

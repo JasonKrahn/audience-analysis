@@ -1,9 +1,9 @@
 cognitive_services:
-  subscription_key: <faceapi_key>
+  subscription_key: <fill>
   faceapi_uri: westeurope.api.cognitive.microsoft.com
-  
+
 event_hubs:
-  policy_secret: <hub_key>
+  policy_secret: <fill>
   namespace: audience-analysis
   policy_name: RootManageSharedAccessKey
   #hub_name: session-feed
@@ -22,12 +22,17 @@ web_app:
   region: northeurope
   app_name: aa-backend
   container_name: vykhand/aa-backend:latest
-  resource_group: aa-backend
+  resource_group: audience-analysis
   plan_name:  aa-backend-plan
 
 redis:
-  key:  <rediskey>
-  host: aa-backend-cache.redis.cache.windows.net
-  expire_sec: 3600 
+  key: <fill>
+  host: <fill>
+  expire_sec: 3600
 
-cosmosdb:
+powerbi:
+  user_name: <fill>
+  password: <fill>
+  client_id:  <fill>
+  workspace_name: AA
+  dataset_names: dataset-aa-sessions, dataset-audience-analysis

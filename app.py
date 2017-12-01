@@ -8,12 +8,15 @@ from flask_cors import CORS
 import requests
 import logging
 
+
 sys.path.append("./lib")
 sys.path.append("./submodules/pypbi")
 
 import aa_backend.util as u
 import aa_backend.messaging as msg
 import aa_backend.caching as cache
+from aa_backend.geo import get_geo
+
 
 import pickle
 from collections import deque
@@ -68,6 +71,10 @@ def process_image():
         ret["session_id"] = sess_id
         log.debug("Sending response to the event hub: " + str(ret))
 
+        #getting geodata
+        ret.update(get_geo(request.remote_addr))
+
+
         sbs.send_event(u.get_setting("event_hubs","hub_name"), json.dumps(ret))
 
         if "FULL_IMG" in request.headers:
@@ -98,8 +105,9 @@ def process_image():
 @app.route("/sessions",methods=["GET"])
 def get_sessions():
     sessions = list(redis_cache.get_sessions())
+    cnt = redis_cache.get_session_count()
     log.debug("List of sessions : {}".format(sessions))
-    resp = jsonify({"sessions":sessions})
+    resp = jsonify({"sessions":sessions, "session_count": cnt})
     resp.status_code = 200
     return resp
 
@@ -130,8 +138,16 @@ def add_header(response):
     return response
 
 if __name__ == "__main__":
-    log.setLevel(logging.DEBUG)
-    log.addHandler(logging.StreamHandler(stream = sys.stdout))
+    log.setLevel(u.get_setting("app", "log_level"))
+    formatter = logging.Formatter('[%(asctime)s] {%(module)s.%(funcName)s:%(lineno)d %(levelname)s} - %(message)s')
+    #'%m-%d %H:%M:%S'
+    handl = logging.StreamHandler(stream = sys.stdout)
+    handl.setFormatter(formatter)
+    log.addHandler(handl)
+
+    #cleaning all datasets after the app restart
+    from aa_backend.pbi import flush_powerbi
+    flush_powerbi()
 
     HOST = os.environ.get("SERVER_HOST", "0.0.0.0")
     try:
