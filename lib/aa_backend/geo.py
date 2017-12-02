@@ -5,7 +5,13 @@ log = logging.getLogger()
 
 def get_geo(ip_addr):
     geo_reader = geolite2.reader()
-    g = geo_reader.get(ip_addr)
+    g = None
+
+    try:
+        g = geo_reader.get(ip_addr)
+    except ValueError:
+        log.error("parsing IP address: {} failed!".format(ip_addr))
+
     log.debug("Geo data :" +  str(g))
     ret = {}
     ret["ip_addr"] = ip_addr

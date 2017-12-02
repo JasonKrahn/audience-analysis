@@ -4,6 +4,7 @@ import collections
 from flask import jsonify
 import yaml, os, sys, subprocess
 
+conf = {}
 
 log = logging.getLogger()
 try:

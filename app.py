@@ -74,6 +74,9 @@ def process_image():
         #getting geodata
         ip_addr = request.access_route[0]
 
+        if ":" in ip_addr:
+            ip_addr = ip_addr.split(":")[0]
+
         log.debug("request.access_route: {}".format(request.access_route))
         log.debug("x-forwarded-for: {}".format(request.headers.getlist("X-Forwarded-For")))
 
