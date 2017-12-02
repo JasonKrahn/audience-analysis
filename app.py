@@ -159,6 +159,9 @@ if __name__ == "__main__":
     from aa_backend.pbi import flush_powerbi
     flush_powerbi()
 
+    #flushing redis
+    redis_cache.flushall()
+
     HOST = os.environ.get("SERVER_HOST", "0.0.0.0")
     try:
         PORT = int(os.environ.get("SERVER_PORT", "5555"))

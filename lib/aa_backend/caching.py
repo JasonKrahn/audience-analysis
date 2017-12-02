@@ -56,3 +56,4 @@ class RedisCache(object):
 
     def flushall(self):
         self._sessdb.flushall()
+        self._thumbdb.flushall()
