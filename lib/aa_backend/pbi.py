@@ -7,6 +7,8 @@ def flush_powerbi():
     client_id   = get_setting("powerbi", "client_id")
     wks_name  = get_setting("powerbi", "workspace_name")
     dataset_names = get_setting("powerbi","dataset_names")
+    if isinstance(dataset_names, str):
+        dataset_names = [i.lstrip().rstrip() for i in dataset_names.split(",")]
 
     p = PowerBI(user_name, password,  client_id)
     p.connect()

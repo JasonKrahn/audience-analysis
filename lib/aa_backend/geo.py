@@ -8,6 +8,7 @@ def get_geo(ip_addr):
     g = geo_reader.get(ip_addr)
     log.debug("Geo data :" +  str(g))
     ret = {}
+    ret["ip_addr"] = ip_addr
 
     if g is not None:
         ret["country"] = g["country"]["names"]["en"]
