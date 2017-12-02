@@ -72,7 +72,17 @@ def process_image():
         log.debug("Sending response to the event hub: " + str(ret))
 
         #getting geodata
-        ret.update(get_geo(request.remote_addr))
+        ip_addr = request.access_route[0]
+
+        log.debug("request.access_route: {}".format(request.access_route))
+        log.debug("x-forwarded-for: {}".format(request.headers.getlist("X-Forwarded-For")))
+
+        #if request.headers.getlist("X-Forwarded-For"):
+        #    ip_addr = request.headers.getlist("X-Forwarded-For")[0]
+        #else:
+        #    ip_addr = request.remote_addr
+
+        ret.update(get_geo(ip_addr))
 
 
         sbs.send_event(u.get_setting("event_hubs","hub_name"), json.dumps(ret))

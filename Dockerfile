@@ -1,4 +1,4 @@
-FROM python:slim
+FROM vykhand/aa-base:latest
 MAINTAINER Andrey Vykhodtsev <anvykhod@microsoft.com>
 
 RUN mkdir /app
@@ -6,7 +6,7 @@ RUN mkdir /app
 COPY . /app/
 WORKDIR /app
 
-RUN pip3 install -r requirements.txt
+#RUN pip3 install -r requirements.txt
 
 RUN chmod 700 ./app.py
 
