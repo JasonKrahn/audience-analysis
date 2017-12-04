@@ -1,0 +1,2 @@
+az webapp log config --application-logging true  --web-server-logging filesystem -g audience-analysis -n aa-backend
+az webapp log tail -g audience-analysis -n aa-backend

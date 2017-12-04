@@ -17,13 +17,13 @@ def get_geo(ip_addr):
     ret["ip_addr"] = ip_addr
 
     if g is not None:
-        ret["country"] = g["country"]["names"]["en"]
-        ret["continent"] =  g["continent"]["names"]["en"]
-        ret["city"] =  g["city"]["names"]["en"]
-        ret["zip"]  =  g["postal"]["code"]
-        ret["timezone"] = g["location"]["time_zone"]
-        ret["latitude"] =g["location"]["latitude"]
-        ret["longitude"] = g["location"]["longitude"]
+        ret["country"] = g.get("country",{}).get("names",{}).get("en", UNDEFINED)
+        ret["continent"] =  g.get("continent",{}).get("names",{}).get("en", UNDEFINED)
+        ret["city"] =  g.get("city",{}).get("names",{}).get("en", UNDEFINED)
+        ret["zip"]  =  g.get("postal",{}).get("code",UNDEFINED)
+        ret["timezone"] = g.get("location",{}).get("time_zone",UNDEFINED)
+        ret["latitude"] =g.get("location",{}).get("latitude")
+        ret["longitude"] = g.get("location",{}).get("longitude")
 
     else:
         log.warning("cant get geolocation for IP {}".format(ip_addr))
