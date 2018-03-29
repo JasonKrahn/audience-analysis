@@ -159,8 +159,7 @@ if (!DEBUG) {
     console.log = function(){};
 }
 
-let BACKEND_BASE_URL = 'https://aa-backend.azurewebsites.net';
-let sessionsUrl = `${BACKEND_BASE_URL}/sessions`;
+let sessionsUrl = '/api/sessions';
 
 function getJeffSessions() {
     $.getJSON(sessionsUrl, function(data) {
@@ -194,7 +193,7 @@ function paint(data) {
         // Backend response must include 'Cache-Control: no-cache',
         // else Chrome (who's testing other browsers anyway?)
         // redraws last cached image
-        image.src = `${BACKEND_BASE_URL}/session-jpeg/${session}`;
+        image.src = `/api/session-jpeg/${session}`;
         image.onload = () => {
             // Paint JPEG on canvas
             let resized = resizeWithAspect(image.width, image.height, 200, 150);

@@ -1,9 +1,5 @@
-// vNext
-
 const thisSessionId = getRandomName();
 $('#sessionId').text(thisSessionId);
-
-let BACKEND_BASE_URL = 'https://aa-backend.azurewebsites.net';
 
 let videoElement = document.querySelector('#camera');
 let videoSelect = document.querySelector('select#videoSource');
@@ -52,9 +48,8 @@ function takePhoto() {
   var frame = captureVideoFrame('camera', 'jpeg');
   i++; // just for debug
   console.log(`Say cheese! - frames sent: ${i}`);
-  const uploadUrl = BACKEND_BASE_URL;
   $.ajax({
-    url: uploadUrl,
+    url: '/api/faces',
     method: 'POST',
     data: frame.arr,
     processData: false,
