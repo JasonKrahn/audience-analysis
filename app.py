@@ -40,7 +40,7 @@ redis_cache = cache.RedisCache()
 #sessionLastFaceAttr = deque(maxlen = int(u.get_setting("app","max_sessions")))
 #sessionLastJPEG = {}
 
-@app.route("/",methods=["GET", "POST"])
+@app.route("/api/faces",methods=["GET", "POST"])
 def process_image():
 
     url = "https://" + u.get_setting("cognitive_services", "faceapi_uri") + "/face/v1.0/detect"
@@ -115,7 +115,7 @@ def process_image():
     else:
         return u.bad_message("Wrong content type, only octet-stream is supported")
 
-@app.route("/sessions",methods=["GET"])
+@app.route("/api/sessions",methods=["GET"])
 def get_sessions():
     sessions = list(redis_cache.get_sessions())
     cnt = redis_cache.get_session_count()
@@ -124,7 +124,7 @@ def get_sessions():
     resp.status_code = 200
     return resp
 
-@app.route("/session-jpeg/<session_id>",methods=["GET"])
+@app.route("/api/session-jpeg/<session_id>",methods=["GET"])
 def get_session_jpeg(session_id):
     thumb = redis_cache.get_session_thumbnail(session_id)
     if thumb is not None:
