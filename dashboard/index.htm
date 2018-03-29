@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <!-- PowerBI JavaScript SDK from CDN (latest ver) -->
+    <script src="https://cdn.jsdelivr.net/npm/powerbi-client/dist/powerbi.min.js"></script>
+    <!-- Our custom embed code -->
+    <script src="js/app.js" defer></script>
+    <style>
+        .full-width-container {
+            width: 100%;
+            max-width: 100%;
+            clear: both;
+            margin: 15px;
+        }
+        body {
+            margin: 0;
+        }
+        .nav {
+			color: #aaa;
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			height: 70px;
+			background: #333;
+        }
+        .flex-container {
+            display: flex;
+            align-items: stretch;
+            width: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <img src="img/logo-dark-small.png" style="float: left; margin-left: 10px; margin-top: 10px" />
+        <span id="sessionCount" style="color: #aaa; margin-top: 35px; margin-left: 20px; float: left"></span>
+		<span style="margin-top: 35px; margin-left: 4px; float: left"> Live Sessions</span>
+		<span>
+			<button id="toggleDashboards" class="button-primary" style="margin: 20px 12px 20px 40px"
+				onClick="$('#streamingDashboardDiv').toggle(); $('#theReportDiv').toggle();">Switch Dash
+			</button>
+        </span>
+        <span>
+			<button id="toggleFullscreen" class="button-primary" style=""
+				onClick="report.fullscreen()">Fullscreen
+			</button>
+		</span>
+        <span style="font: 16px sans-serif; color: #bbb; margin: 38px 20px 0 0; float: right">Enterprise Dashboard</span>
+    </nav>
+
+
+    <div class="full-width-container">
+
+        <div class="flex-container">
+            <div id="canvasWrapper" style="width: 210px; margin-right: 16px; flex: 1"></div>
+            <div id="streamingDashboardDiv" style="height: 900px; flex: 9"></div>
+            <div id="theReportDiv" style="display: none; height: 680px; flex: 9"></div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
