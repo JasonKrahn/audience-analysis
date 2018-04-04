@@ -3,8 +3,8 @@
 import os
 import sys
 import json
-from flask import Flask, request, Response, jsonify
-from flask_cors import CORS
+from flask import Flask, request, Response, jsonify, render_template, url_for
+#from flask_cors import CORS
 import requests
 import logging
 
@@ -17,6 +17,7 @@ import aa_backend.messaging as msg
 import aa_backend.caching as cache
 from aa_backend.geo import get_geo
 
+import aa_backend.pbi as pbi
 
 import pickle
 from collections import deque
@@ -26,7 +27,7 @@ from collections import deque
 log = logging.getLogger()
 
 app = Flask(__name__, static_url_path="/static")
-CORS(app)
+#CORS(app)
 
 # Make the WSGI interface available at the top level so wfastcgi can get it.
 wsgi_app = app.wsgi_app
@@ -39,6 +40,31 @@ redis_cache = cache.RedisCache()
 # two in-memory structures to maintain last faceAttr and last JPEG
 #sessionLastFaceAttr = deque(maxlen = int(u.get_setting("app","max_sessions")))
 #sessionLastJPEG = {}
+
+@app.route('/')
+def hello():
+    return redirect(url_for('dashboard'))
+
+@app.route("/camera", methods=["GET"])
+def serve_camera():
+    return render_template("camera_index.htm")
+
+@app.route("/dashboard",methods=["GET"] )
+def serve_dashboard():
+    #send_from_directory(filename="dashboard/index.html")
+    return render_template("dash_index.htm")
+
+@app.route('/api/report-token')
+def get_token():
+    j = pbi.get_report_token()
+    return j, 200, {'Content-Type': 'application/json'}
+
+@app.route('/api/dashboard-token')
+def get_token():
+    j = pbi.get_dashboard_token()
+    return j, 200, {'Content-Type': 'application/json'}
+
+
 
 @app.route("/api/faces",methods=["GET", "POST"])
 def process_image():
@@ -159,8 +185,7 @@ if __name__ == "__main__":
     log.addHandler(handl)
 
     #cleaning all datasets after the app restart
-    from aa_backend.pbi import flush_powerbi
-    flush_powerbi()
+    pbi.flush_powerbi()
 
     #flushing redis
     redis_cache.flushall()

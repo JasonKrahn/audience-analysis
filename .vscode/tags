@@ -1,0 +1,132 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/c04ceb81/
+API_BASE	..\\submodules\\pypbi\\pypbi\\constants.py	/^API_BASE = "https:\/\/api.powerbi.com\/v1.0\/myorg\/"$/;"	kind:variable	line:5
+API_BASE_GROUP	..\\submodules\\pypbi\\pypbi\\constants.py	/^API_BASE_GROUP = API_BASE + "groups\/{wks_id}\/"$/;"	kind:variable	line:6
+C	..\\submodules\\pypbi\\pypbi\\core.py	/^from . import classes as C$/;"	kind:unknown	line:5
+DATASET_BY_ID	..\\submodules\\pypbi\\pypbi\\constants.py	/^DATASET_BY_ID = API_BASE_GROUP + "datasets\/{ds_id}"$/;"	kind:variable	line:13
+DATASET_BY_ID_DEFAULT	..\\submodules\\pypbi\\pypbi\\constants.py	/^DATASET_BY_ID_DEFAULT = API_BASE + "datasets\/{ds_id}"$/;"	kind:variable	line:12
+DATASET_LIST	..\\submodules\\pypbi\\pypbi\\constants.py	/^DATASET_LIST = API_BASE_GROUP + "datasets"$/;"	kind:variable	line:10
+DATASET_LIST_DEFAULT	..\\submodules\\pypbi\\pypbi\\constants.py	/^DATASET_LIST_DEFAULT = API_BASE + "datasets"$/;"	kind:variable	line:9
+Dataset	..\\submodules\\pypbi\\pypbi\\classes.py	/^class Dataset(object):$/;"	kind:class	line:41
+EMPTY_RESPONSE	..\\lib\\aa_backend\\util.py	/^EMPTY_RESPONSE = {'num_faces':0, 'smile': 0.0, 'age': 0, 'males': 0, 'females': 0, 'anger': 0.0,/;"	kind:variable	line:16
+GROUPS_LIST	..\\submodules\\pypbi\\pypbi\\constants.py	/^GROUPS_LIST = API_BASE + "groups"$/;"	kind:variable	line:7
+HOST	..\\app.py	/^    HOST = os.environ.get("SERVER_HOST", "0.0.0.0")$/;"	kind:variable	line:168
+PBI_AUTHORITY	..\\submodules\\pypbi\\pypbi\\constants.py	/^PBI_AUTHORITY =  "https:\/\/login.microsoftonline.com\/common"$/;"	kind:variable	line:1
+PBI_RESOURCE	..\\submodules\\pypbi\\pypbi\\constants.py	/^PBI_RESOURCE = "https:\/\/analysis.windows.net\/powerbi\/api"$/;"	kind:variable	line:2
+PORT	..\\app.py	/^        PORT = 5555$/;"	kind:variable	line:172
+PowerBI	..\\submodules\\pypbi\\pypbi\\core.py	/^class PowerBI(object):$/;"	kind:class	line:10
+RedisCache	..\\lib\\aa_backend\\caching.py	/^class RedisCache(object):$/;"	kind:class	line:10
+SESSIONS_DB	..\\lib\\aa_backend\\caching.py	/^SESSIONS_DB = 1$/;"	kind:variable	line:7
+TABLES_LIST	..\\submodules\\pypbi\\pypbi\\constants.py	/^TABLES_LIST = API_BASE_GROUP + "datasets\/{ds_id}\/tables"$/;"	kind:variable	line:16
+TABLES_LIST_DEFAULT	..\\submodules\\pypbi\\pypbi\\constants.py	/^TABLES_LIST_DEFAULT = API_BASE + "\/datasets\/{ds_id}\/tables"$/;"	kind:variable	line:15
+TABLE_DELETE_ROWS	..\\submodules\\pypbi\\pypbi\\constants.py	/^TABLE_DELETE_ROWS = API_BASE_GROUP + "\/datasets\/{ds_id}\/tables\/{tbl_name}\/rows"/;"	kind:variable	line:19
+TABLE_DELETE_ROWS_DEFAULT	..\\submodules\\pypbi\\pypbi\\constants.py	/^TABLE_DELETE_ROWS_DEFAULT = API_BASE + "\/datasets\/{ds_id}\/tables\/{tbl_name}\/rows"$/;"	kind:variable	line:18
+THUMBNAIL_DB	..\\lib\\aa_backend\\caching.py	/^THUMBNAIL_DB = 0$/;"	kind:variable	line:6
+Table	..\\submodules\\pypbi\\pypbi\\classes.py	/^class Table(object):$/;"	kind:class	line:80
+UNDEFINED	..\\lib\\aa_backend\\geo.py	/^UNDEFINED = "Undefined"$/;"	kind:variable	line:2
+Workspace	..\\submodules\\pypbi\\pypbi\\classes.py	/^class Workspace(object):$/;"	kind:class	line:6
+__init__	..\\lib\\aa_backend\\caching.py	/^    def __init__(self, *args):$/;"	kind:member	line:11
+__init__	..\\submodules\\pypbi\\pypbi\\classes.py	/^    def __init__(self, ds, tbl_name):$/;"	kind:member	line:81
+__init__	..\\submodules\\pypbi\\pypbi\\classes.py	/^    def __init__(self, pbi, wks_id = None, wks_name = "", isReadOnly = False):$/;"	kind:member	line:7
+__init__	..\\submodules\\pypbi\\pypbi\\classes.py	/^    def __init__(self, wks, ds_id, ds_name = None, details = None):$/;"	kind:member	line:42
+__init__	..\\submodules\\pypbi\\pypbi\\core.py	/^    def __init__(self, user_name, password, client_id):$/;"	kind:member	line:11
+__init__.py	..\\lib\\aa_backend\\__init__.py	1;"	kind:file	line:1
+__init__.py	..\\submodules\\pypbi\\pypbi\\__init__.py	1;"	kind:file	line:1
+__repr__	..\\submodules\\pypbi\\pypbi\\classes.py	/^    def __repr__(self):$/;"	kind:member	line:22
+__repr__	..\\submodules\\pypbi\\pypbi\\classes.py	/^    def __repr__(self):$/;"	kind:member	line:62
+__repr__	..\\submodules\\pypbi\\pypbi\\classes.py	/^    def __repr__(self):$/;"	kind:member	line:93
+__str__	..\\submodules\\pypbi\\pypbi\\classes.py	/^    def __str__(self):$/;"	kind:member	line:16
+__str__	..\\submodules\\pypbi\\pypbi\\classes.py	/^    def __str__(self):$/;"	kind:member	line:59
+_str_	..\\submodules\\pypbi\\pypbi\\classes.py	/^    def _str_(self):$/;"	kind:member	line:90
+add_header	..\\app.py	/^def add_header(response):$/;"	kind:function	line:146
+app	..\\app.py	/^app = Flask(__name__, static_url_path="\/static")$/;"	kind:variable	line:28
+app.py	..\\app.py	1;"	kind:file	line:1
+az	..\\run.py	/^import aa_backend.azure as az$/;"	kind:namespace	line:9
+azure.py	..\\lib\\aa_backend\\azure.py	1;"	kind:file	line:1
+bad_message	..\\lib\\aa_backend\\util.py	/^def bad_message(msg):$/;"	kind:function	line:73
+cache	..\\app.py	/^import aa_backend.caching as cache$/;"	kind:namespace	line:17
+cache_img	..\\lib\\aa_backend\\caching.py	/^    def cache_img(self, sess_id, img):$/;"	kind:member	line:28
+cache_sess_detail	..\\lib\\aa_backend\\caching.py	/^    def cache_sess_detail(self,sess_id, detail_dict):$/;"	kind:member	line:38
+cache_session	..\\lib\\aa_backend\\caching.py	/^    def cache_session(self, sess_id):$/;"	kind:member	line:32
+cache_thumbnail	..\\lib\\aa_backend\\caching.py	/^    def cache_thumbnail(self, sess_id, img, faces):$/;"	kind:member	line:21
+caching.py	..\\lib\\aa_backend\\caching.py	1;"	kind:file	line:1
+classes.py	..\\submodules\\pypbi\\pypbi\\classes.py	1;"	kind:file	line:1
+conf	..\\lib\\aa_backend\\util.py	/^        conf = yaml.load(f)$/;"	kind:variable	line:12
+conf	..\\lib\\aa_backend\\util.py	/^conf = {}$/;"	kind:variable	line:7
+connect	..\\submodules\\pypbi\\pypbi\\core.py	/^    def connect(self):$/;"	kind:member	line:18
+const	..\\submodules\\pypbi\\pypbi\\classes.py	/^from . import constants as const$/;"	kind:unknown	line:1
+const	..\\submodules\\pypbi\\pypbi\\core.py	/^from . import constants as const$/;"	kind:unknown	line:4
+constants.py	..\\submodules\\pypbi\\pypbi\\constants.py	1;"	kind:file	line:1
+core.py	..\\submodules\\pypbi\\pypbi\\core.py	1;"	kind:file	line:1
+create_webapp	..\\lib\\aa_backend\\azure.py	/^def create_webapp(dry_run = False):$/;"	kind:function	line:42
+db.py	..\\lib\\aa_backend\\db.py	1;"	kind:file	line:1
+delete_rows	..\\submodules\\pypbi\\pypbi\\classes.py	/^    def delete_rows(self):$/;"	kind:member	line:96
+delete_webapp	..\\lib\\aa_backend\\azure.py	/^def delete_webapp():$/;"	kind:function	line:35
+dry	..\\run.py	/^        dry = len(sys.argv)>2 and (sys.argv[2] in ("-d" , "--dry"))$/;"	kind:variable	line:20
+faces	..\\lib\\aa_backend\\img.py	/^        faces = json.load(f)$/;"	kind:variable	line:91
+flush_powerbi	..\\lib\\aa_backend\\pbi.py	/^def flush_powerbi():$/;"	kind:function	line:4
+flushall	..\\lib\\aa_backend\\caching.py	/^    def flushall(self):$/;"	kind:member	line:57
+formatter	..\\app.py	/^    formatter = logging.Formatter('[%(asctime)s] {%(module)s.%(funcName)s:%(lineno)d %(levelname/;"	kind:variable	line:155
+geo.py	..\\lib\\aa_backend\\geo.py	1;"	kind:file	line:1
+get_agg_face_attrs	..\\lib\\aa_backend\\util.py	/^def get_agg_face_attrs(js):$/;"	kind:function	line:36
+get_create_plan_cmd	..\\lib\\aa_backend\\azure.py	/^def get_create_plan_cmd(settings):$/;"	kind:function	line:6
+get_dataset_by_id	..\\submodules\\pypbi\\pypbi\\classes.py	/^    def get_dataset_by_id(self, ds_id):$/;"	kind:member	line:37
+get_datasets	..\\submodules\\pypbi\\pypbi\\classes.py	/^    def get_datasets(self):$/;"	kind:member	line:27
+get_ehub	..\\lib\\aa_backend\\messaging.py	/^def get_ehub():$/;"	kind:function	line:4
+get_geo	..\\lib\\aa_backend\\geo.py	/^def get_geo(ip_addr):$/;"	kind:function	line:6
+get_reports	..\\submodules\\pypbi\\pypbi\\classes.py	/^    def get_reports(self):$/;"	kind:member	line:25
+get_restart_cmd	..\\lib\\aa_backend\\azure.py	/^def get_restart_cmd(settings):$/;"	kind:function	line:29
+get_session_count	..\\lib\\aa_backend\\caching.py	/^    def get_session_count(self):$/;"	kind:member	line:48
+get_session_detail	..\\lib\\aa_backend\\caching.py	/^    def get_session_detail(self, sess_id):$/;"	kind:member	line:51
+get_session_jpeg	..\\app.py	/^def get_session_jpeg(session_id):$/;"	kind:function	line:128
+get_session_thumbnail	..\\lib\\aa_backend\\caching.py	/^    def get_session_thumbnail(self, sess_id):$/;"	kind:member	line:54
+get_sessions	..\\app.py	/^def get_sessions():$/;"	kind:function	line:119
+get_sessions	..\\lib\\aa_backend\\caching.py	/^    def get_sessions(self):$/;"	kind:member	line:42
+get_setting	..\\lib\\aa_backend\\util.py	/^def get_setting(category, setting_name):$/;"	kind:function	line:18
+get_settings_cmd	..\\lib\\aa_backend\\azure.py	/^def get_settings_cmd(settings):$/;"	kind:function	line:20
+get_tables	..\\submodules\\pypbi\\pypbi\\classes.py	/^    def get_tables(self):$/;"	kind:member	line:66
+get_webapp_cmd	..\\lib\\aa_backend\\azure.py	/^def get_webapp_cmd(settings):$/;"	kind:function	line:13
+get_workspaces	..\\submodules\\pypbi\\pypbi\\core.py	/^    def get_workspaces(self):$/;"	kind:member	line:48
+handl	..\\app.py	/^    handl = logging.StreamHandler(stream = sys.stdout)$/;"	kind:variable	line:157
+im	..\\lib\\aa_backend\\img.py	/^    im = Image.open(io.BytesIO(im))$/;"	kind:variable	line:95
+im	..\\lib\\aa_backend\\img.py	/^    im = paint_boxes(img, faces)$/;"	kind:variable	line:93
+im	..\\lib\\aa_backend\\img.py	/^    im = resize_img(im, (200,500))$/;"	kind:variable	line:94
+img	..\\lib\\aa_backend\\img.py	/^        img = i.read()$/;"	kind:variable	line:88
+img.py	..\\lib\\aa_backend\\img.py	1;"	kind:file	line:1
+log	..\\app.py	/^log = logging.getLogger()$/;"	kind:variable	line:26
+log	..\\lib\\aa_backend\\azure.py	/^log = logging.getLogger()$/;"	kind:variable	line:2
+log	..\\lib\\aa_backend\\geo.py	/^log = logging.getLogger()$/;"	kind:variable	line:4
+log	..\\lib\\aa_backend\\img.py	/^log = logging.getLogger()$/;"	kind:variable	line:6
+log	..\\lib\\aa_backend\\manage.py	/^log = logging.getLogger()$/;"	kind:variable	line:2
+log	..\\lib\\aa_backend\\util.py	/^log = logging.getLogger()$/;"	kind:variable	line:9
+log	..\\run.py	/^log = logging.getLogger()$/;"	kind:variable	line:6
+log	..\\submodules\\pypbi\\pypbi\\classes.py	/^log = logging.getLogger()$/;"	kind:variable	line:3
+log	..\\submodules\\pypbi\\pypbi\\core.py	/^log = logging.getLogger()$/;"	kind:variable	line:8
+manage.py	..\\lib\\aa_backend\\manage.py	1;"	kind:file	line:1
+messaging.py	..\\lib\\aa_backend\\messaging.py	1;"	kind:file	line:1
+mng	..\\run.py	/^import aa_backend.manage as mng$/;"	kind:namespace	line:8
+msg	..\\app.py	/^import aa_backend.messaging as msg$/;"	kind:namespace	line:16
+p	..\\test.py	/^    p = PowerBI(u.get_setting("powerbi", "user_name"),$/;"	kind:variable	line:5
+paint_boxes	..\\lib\\aa_backend\\img.py	/^def paint_boxes(img, faces):$/;"	kind:function	line:25
+pbi.py	..\\lib\\aa_backend\\pbi.py	1;"	kind:file	line:1
+process_image	..\\app.py	/^def process_image():$/;"	kind:function	line:44
+r	..\\run.py	/^        r = RedisCache()$/;"	kind:variable	line:27
+rectangle	..\\lib\\aa_backend\\img.py	/^def rectangle(draw, coords, fill, width = 1):$/;"	kind:function	line:10
+redis_cache	..\\app.py	/^redis_cache = cache.RedisCache()$/;"	kind:variable	line:36
+request	..\\submodules\\pypbi\\pypbi\\core.py	/^    def request(self, req):$/;"	kind:member	line:32
+resize_img	..\\lib\\aa_backend\\img.py	/^def resize_img(img, newsize, fill_color = "black"):$/;"	kind:function	line:72
+run.py	..\\run.py	1;"	kind:file	line:1
+run_docker	..\\lib\\aa_backend\\manage.py	/^def run_docker(img_name = "vykhand\/aa-backend:latest"):$/;"	kind:function	line:7
+sbs	..\\app.py	/^sbs = msg.get_ehub()$/;"	kind:variable	line:35
+set_env	..\\lib\\aa_backend\\util.py	/^def set_env(exclude_cat = ['web_app'], return_values = False):$/;"	kind:function	line:81
+setup.py	..\\submodules\\pypbi\\setup.py	1;"	kind:file	line:1
+test.py	..\\test.py	1;"	kind:file	line:1
+u	..\\app.py	/^import aa_backend.util as u$/;"	kind:namespace	line:15
+u	..\\test.py	/^from aa_backend import util as u$/;"	kind:unknown	line:2
+util.py	..\\lib\\aa_backend\\util.py	1;"	kind:file	line:1
+wsgi_app	..\\app.py	/^wsgi_app = app.wsgi_app$/;"	kind:variable	line:32

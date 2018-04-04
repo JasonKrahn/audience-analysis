@@ -14,7 +14,7 @@ $.ajax({
     beforeSend: () => {
         $('#streamingDashboardDiv').html('<center>' +
             '<p>Loading dashboard...</p>' +
-            '<img src="img/squirrel_loading.gif" />' +
+            '<img src="/static/img/squirrel_loading.gif" />' +
             '</center>');
     },
     complete: () => {
@@ -76,7 +76,7 @@ function embedDashboard(result, divName) {
         //             console.error(errors);
         //         });
         // });
-        
+
         // Be verbose about PowerBI events
         dashboard.off('dataSelected');
         dashboard.off('filtersApplied');
@@ -133,7 +133,7 @@ function embedReport(result, divName) {
         //             console.error(errors);
         //         });
         // });
-        
+
         // Be verbose about PowerBI events
         report.off('dataSelected', event => {
             $('#canvasWrapper > div').css('border', 'none');
@@ -170,9 +170,9 @@ function getJeffSessions() {
 
 function resizeWithAspect(srcWidth, srcHeight, maxWidth, maxHeight) {
     var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
-    return { 
+    return {
         width: srcWidth * ratio,
-        height: srcHeight * ratio 
+        height: srcHeight * ratio
     };
 }
 

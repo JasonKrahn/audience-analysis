@@ -35,14 +35,14 @@ def paint_boxes(img, faces):
     draw = ImageDraw.Draw(im)
     width, height = im.size
     log.debug("Image width: {} height {}".format(width,height))
-    
+
     for f in faces:
-        
+
         log.debug("Operating on face entry:\n {}".format(f))
-        
+
         rect = f['faceRectangle']
 
-        coords = [rect['left'], rect['top'], rect['left'] + rect['width'], 
+        coords = [rect['left'], rect['top'], rect['left'] + rect['width'],
                     rect['top']+rect['height']]
         #draw.rectangle(rect, outline="red")
         rectangle(draw, coords, "red", 3)
@@ -56,14 +56,14 @@ def paint_boxes(img, faces):
         caption_topup = "Age: {}".format(age)
         caption_topbot = gender
         caption_bot = emotion
-        
-        font = ImageFont.truetype("img/arial.ttf", size=10)
+
+        font = ImageFont.truetype("/static/img/arial.ttf", size=10)
 
         draw.text([coords[0],coords[1]-11], caption_topup, font = font, fill = "blue")
 
         draw.text([coords[0]+4,coords[1]+2], caption_topbot, font = font, fill = "blue")
         draw.text([coords[0]+4,coords[3]-11], caption_bot, font = font, fill = "blue")
-        
+
         ret = io.BytesIO()
         im.save(ret, "JPEG")
     return ret.getvalue()
@@ -84,10 +84,10 @@ if __name__ == '__main__':
     log.setLevel(logging.ERROR)
     log.addHandler(logging.StreamHandler(stream = sys.stdout))
 
-    with open("img/multiple-faces.jpg","rb") as i:
+    with open("/static/img/multiple-faces.jpg","rb") as i:
         img = i.read()
 
-    with open("img/test_json.json","r") as f:
+    with open("/static/test_json.json","r") as f:
         faces = json.load(f)
     #log.debug(str(faces))
     im = paint_boxes(img, faces)
@@ -95,4 +95,4 @@ if __name__ == '__main__':
     im = Image.open(io.BytesIO(im))
     im.show()
 
-    
+
