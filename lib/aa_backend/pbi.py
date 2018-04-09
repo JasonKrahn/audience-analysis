@@ -53,7 +53,7 @@ def get_report_token():
             "embed_url": "{:s}",\
             "report_id": "{:s}"\
          }}'.format(token, report.embedUrl, report.report_id)
-    return json.loads(j)
+    return j
 
 def get_dashboard_token():
     p = get_pbi_conn()
@@ -62,13 +62,13 @@ def get_dashboard_token():
     wks_name = get_setting("powerbi", "workspace_name")
     wks = p.get_workspace_by_name(wks_name)
     if not wks: raise KeyError("Workspace not found")
-    dash = p.get_dashboard_by_name(dash_name)
+    dash = wks.get_dashboard_by_name(dash_name)
     if not dash: raise KeyError("PowerBI Report not found")
     token = dash.get_token("View")
-
+    embedUrl = dash.get_embedUrl()
     j = '{{\
             "embedToken": "{:s}",\
             "embed_url": "{:s}",\
             "report_id": "{:s}"\
-         }}'.format(token, dash.embedUrl, dash.dashboard_id)
-    return json.loads(j)
+         }}'.format(token, embedUrl, dash.dashboard_id)
+    return j

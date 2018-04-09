@@ -3,8 +3,11 @@
 // TODO: Add web.config and force HTTPS
 
 // You can use the DisplayName as well instead of Id
-let streamingDashboard = 'https://aa-funcbi.azurewebsites.net/api/dash-embed-token/dashboard/c5558acb-984a-4ed1-b37a-d9808feea1cb';
-let theReport = 'https://aa-funcbi.azurewebsites.net/api/report-embed-token/report/9823b019-8db2-4760-90da-4e4cdffb1a9d';
+//let streamingDashboard = 'https://aa-funcbi.azurewebsites.net/api/dash-embed-token/dashboard/c5558acb-984a-4ed1-b37a-d9808feea1cb';
+//let theReport = 'https://aa-funcbi.azurewebsites.net/api/report-embed-token/report/9823b019-8db2-4760-90da-4e4cdffb1a9d';
+
+let streamingDashboard = '/api/report-token';
+let theReport = '/api/dash-token';
 
 $.ajax({
     url: streamingDashboard,

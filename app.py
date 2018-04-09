@@ -3,7 +3,8 @@
 import os
 import sys
 import json
-from flask import Flask, request, Response, jsonify, render_template, url_for
+from flask import Flask, request, Response, jsonify
+from flask import render_template, url_for, redirect
 #from flask_cors import CORS
 import requests
 import logging
@@ -43,7 +44,7 @@ redis_cache = cache.RedisCache()
 
 @app.route('/')
 def hello():
-    return redirect(url_for('dashboard'))
+    return redirect(url_for('serve_dashboard'))
 
 @app.route("/camera", methods=["GET"])
 def serve_camera():
@@ -55,12 +56,12 @@ def serve_dashboard():
     return render_template("dash_index.htm")
 
 @app.route('/api/report-token')
-def get_token():
+def get_report_token():
     j = pbi.get_report_token()
     return j, 200, {'Content-Type': 'application/json'}
 
-@app.route('/api/dashboard-token')
-def get_token():
+@app.route('/api/dash-token')
+def get_dash_token():
     j = pbi.get_dashboard_token()
     return j, 200, {'Content-Type': 'application/json'}
 
