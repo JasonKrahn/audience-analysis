@@ -40,7 +40,7 @@ class ReverseProxied(object):
 log = logging.getLogger()
 
 app = Flask(__name__, static_url_path="/static")
-app.wsgi_app = ReverseProxied(app.wsgi_app)
+#app.wsgi_app = ReverseProxied(app.wsgi_app)
 #CORS(app)
 
 # Make the WSGI interface available at the top level so wfastcgi can get it.
@@ -66,7 +66,11 @@ def serve_camera():
 @app.route("/dashboard",methods=["GET"] )
 def serve_dashboard():
     #send_from_directory(filename="dashboard/index.html")
-    return render_template("dash_index.htm",  camera_url = url_for("serve_camera"))
+    if "azurewebsites.net" in request.url_root:
+        camera_url = url_for("serve_camera",  _external=True, _scheme='https')
+    else:
+        camera_url = url_for("serve_camera")
+    return render_template("dash_index.htm", camera_url = camera_url )
 
 @app.route('/api/report-token')
 def get_report_token():
