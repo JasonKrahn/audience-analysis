@@ -23,11 +23,24 @@ import aa_backend.pbi as pbi
 import pickle
 from collections import deque
 
+# so that we alwayse get https for url_for
+# as stated in this SO
+# https://stackoverflow.com/questions/14810795/flask-url-for-generating-http-url-instead-of-https
 
+class ReverseProxied(object):
+    def __init__(self, app):
+        self.app = app
+
+    def __call__(self, environ, start_response):
+        scheme = environ.get('HTTP_X_FORWARDED_PROTO')
+        if scheme:
+            environ['wsgi.url_scheme'] = scheme
+        return self.app(environ, start_response)
 
 log = logging.getLogger()
 
 app = Flask(__name__, static_url_path="/static")
+app.wsgi_app = ReverseProxied(app.wsgi_app)
 #CORS(app)
 
 # Make the WSGI interface available at the top level so wfastcgi can get it.
@@ -53,7 +66,7 @@ def serve_camera():
 @app.route("/dashboard",methods=["GET"] )
 def serve_dashboard():
     #send_from_directory(filename="dashboard/index.html")
-    return render_template("dash_index.htm")
+    return render_template("dash_index.htm",  camera_url = url_for("serve_camera"))
 
 @app.route('/api/report-token')
 def get_report_token():
