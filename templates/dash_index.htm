@@ -44,14 +44,24 @@
 		<span style="margin-top: 35px; margin-left: 4px; float: left"> Live Sessions</span>
 		<span>
 			<button id="toggleDashboards" class="button-primary" style="margin: 20px 12px 20px 40px"
-				onClick="$('#streamingDashboardDiv').toggle(); $('#theReportDiv').toggle();">Switch Dash
+                onClick="$('#streamingDashboardDiv').toggle(); $('#theReportDiv').toggle();">
+                Switch Dash
 			</button>
         </span>
         <span>
-			<button id="toggleFullscreen" class="button-primary" style=""
-				onClick="report.fullscreen()">Fullscreen
+			<button id="toggleFullscreen" class="button-primary"
+                onClick="report.fullscreen()">
+                Fullscreen
 			</button>
 		</span>
+        <span>
+            <a href="/camera" target="_blank">
+                <button id="openCameraApp" class="button"
+                    style="background:rgb(255, 221, 31); border-color: rgb(255, 221, 31); margin-left: 30px">
+                    Open Camera App
+                </button>
+            </a>
+        </span>
         <span style="font: 16px sans-serif; color: #bbb; margin: 38px 20px 0 0; float: right">Enterprise Dashboard</span>
     </nav>
 
