@@ -16,6 +16,8 @@ if __name__ == "__main__":
     log.addHandler(logging.StreamHandler(stream = sys.stdout))
     if sys.argv[1] == "run_docker":
         mng.run_docker()
+    elif sys.argv[1] == "update_docker":
+        mng.update_docker()
     elif sys.argv[1] == "create_app":
         dry = len(sys.argv)>2 and (sys.argv[2] in ("-d" , "--dry"))
         az.create_webapp(dry_run=dry)

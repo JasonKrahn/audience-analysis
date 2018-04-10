@@ -1,11 +1,13 @@
 import logging
 log = logging.getLogger()
-from .util import set_env, conf
+from aa_backend.util import set_env, conf, get_setting
 from itertools import chain
 import subprocess, os
+from aa_backend.azure import get_restart_cmd
 
-def run_docker(img_name = "vykhand/aa-backend:latest"):
+def run_docker():
     ''' reading env vars and runs docker file '''
+    img_name = get_setting("web_app", "container_name")
     env_vars = set_env()
 
     #constructing a list of env vars to pass to command line
@@ -28,3 +30,18 @@ def run_docker(img_name = "vykhand/aa-backend:latest"):
     log.debug("running command " + str(cmd))
 
     subprocess.Popen(cmd, shell=True)
+
+def update_docker():
+    img_name = get_setting("web_app", "container_name")
+    tag = img_name.replace(":latest", "")
+
+    cmd = []
+
+    cmd.append("docker build -t {} .".format(tag))
+    cmd.append("docker push {}".format(tag))
+    cmd.append(get_restart_cmd(conf["web_app"]))
+
+    for c in cmd:
+        log.debug("running command: " + c)
+        subprocess.Popen(c, shell=True)
+
