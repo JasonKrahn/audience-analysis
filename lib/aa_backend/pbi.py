@@ -65,10 +65,10 @@ def get_dashboard_token():
     dash = wks.get_dashboard_by_name(dash_name)
     if not dash: raise KeyError("PowerBI Report not found")
     token = dash.get_token("View")
-    embedUrl = dash.get_embedUrl()
+
     j = '{{\
             "embed_token": "{:s}",\
             "embed_url": "{:s}",\
             "dashboard_id": "{:s}"\
-         }}'.format(token, embedUrl, dash.dashboard_id)
+         }}'.format(token, dash.embedUrl, dash.dashboard_id)
     return j
