@@ -57,7 +57,7 @@ def paint_boxes(img, faces):
         caption_topbot = gender
         caption_bot = emotion
 
-        font = ImageFont.truetype("/static/img/arial.ttf", size=10)
+        font = ImageFont.truetype("static/img/arial.ttf", size=10)
 
         draw.text([coords[0],coords[1]-11], caption_topup, font = font, fill = "blue")
 
