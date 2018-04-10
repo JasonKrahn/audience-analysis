@@ -49,7 +49,7 @@ def get_report_token():
     token = report.get_token("View")
 
     j = '{{\
-            "embedToken": "{:s}",\
+            "embed_token": "{:s}",\
             "embed_url": "{:s}",\
             "report_id": "{:s}"\
          }}'.format(token, report.embedUrl, report.report_id)
@@ -67,8 +67,8 @@ def get_dashboard_token():
     token = dash.get_token("View")
     embedUrl = dash.get_embedUrl()
     j = '{{\
-            "embedToken": "{:s}",\
+            "embed_token": "{:s}",\
             "embed_url": "{:s}",\
-            "report_id": "{:s}"\
+            "dashboard_id": "{:s}"\
          }}'.format(token, embedUrl, dash.dashboard_id)
     return j
