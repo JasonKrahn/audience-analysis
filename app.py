@@ -63,6 +63,10 @@ def hello():
 def serve_camera():
     return render_template("camera_index.htm")
 
+@app.route("/login", methods=["GET"])
+def serve_login():
+    return render_template("login.htm")
+
 @app.route("/dashboard",methods=["GET"] )
 def serve_dashboard():
     #send_from_directory(filename="dashboard/index.html")
