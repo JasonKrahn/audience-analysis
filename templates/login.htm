@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <!-- Tingle Modal -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.13.2/tingle.css" integrity="sha256-AVsl3+fF0rEhcNCs2ZJJJfqEJzwABaWx16gHTH72f2k=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.13.2/tingle.js" integrity="sha256-42Wg3+Q/1prmPDKswSpk/SrulKMlTsuQbRnEUH4Ms70=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- login modal -->
+    <script>
+        function checkSecret(secret) {
+            $.ajax({
+                url: '/api/sessions',
+                method: 'GET',
+                success: function (data, textStatus, xhr) {
+                    console.log(`${textStatus}. Got response: ${xhr.status} ${xhr.statusText}`);
+                    console.log(data);
+                },
+                fail: function (data) {
+                    console.error(data);
+                }
+            });
+        }
+
+        // instanciate new modal
+        var modal = new tingle.modal({
+            footer: true,
+            stickyFooter: false,
+            closeMethods: ['overlay', 'escape'],
+            closeLabel: "Close",
+            cssClass: ['custom-class-1', 'custom-class-2'],
+            onOpen: function() {
+                console.log('modal open');
+            },
+            onClose: function() {
+                console.log('modal closed');
+                checkSecret($('#secret').val());
+            },
+            beforeClose: function() {
+                // here's goes some logic
+                // e.g. save content before closing the modal
+                return true; // close the modal
+                return false; // nothing happens
+            }
+        });
+        
+        modal.setContent(`
+            <form action="#">
+            <label>Secret:</label>
+            <input type="password" id="secret" autocomplete="off"
+                size="30" style="border: #ddd dashed; font: 14px monospace" />
+            </form>
+        `);
+        
+        // add a button
+        modal.addFooterBtn('Open Enterprise Dashboard', 'tingle-btn tingle-btn--primary', function() {
+            // here goes some logic
+            document.cookie = 'secret=' + $('#secret').val();
+            modal.close();
+        });
+        
+        // open modal
+        modal.open();
+    </script>
+</body>
