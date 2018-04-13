@@ -32,9 +32,12 @@
                 method: 'GET',
                 success: function (data, textStatus, xhr) {
                     console.log(`${textStatus}. Got response: ${xhr.status} ${xhr.statusText}`);
+                    modal.close(); // we have a valid secret
                     location.href = '/dashboard';
                 },
-                fail: function (data) {
+                error: function (data) {
+                    console.error('Calling /api/sessions has failed.');
+                    $('#badlogin').text('BAD SECRET. TRY AGAIN.');
                     console.error(data);
                 }
             });
@@ -52,7 +55,6 @@
             },
             onClose: function() {
                 console.log('modal closed');
-                checkSecret();
             },
             beforeClose: function() {
                 // here's goes some logic
@@ -63,7 +65,8 @@
         });
         
         modal.setContent(`
-            <form action="#">
+            <form id="login" action="#">
+            <h3 id="badlogin"></h3>
             <input type="password" id="secret" autocomplete="off" size="30"
                 placeholder="ENTER SECRET" />
             </form>
@@ -71,9 +74,8 @@
         
         // add a button
         modal.addFooterBtn('Open Enterprise Dashboard', 'tingle-btn tingle-btn--danger', function() {
-            // here goes some logic
             document.cookie = 'secret=' + $('#secret').val();
-            modal.close();
+            checkSecret();
         });
         
         // open modal
