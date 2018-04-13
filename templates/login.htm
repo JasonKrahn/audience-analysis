@@ -14,13 +14,13 @@
 <body>
     <!-- login modal -->
     <script>
-        function checkSecret(secret) {
+        function checkSecret() {
             $.ajax({
                 url: '/api/sessions',
                 method: 'GET',
                 success: function (data, textStatus, xhr) {
                     console.log(`${textStatus}. Got response: ${xhr.status} ${xhr.statusText}`);
-                    console.log(data);
+                    location.href = '/dashboard';
                 },
                 fail: function (data) {
                     console.error(data);
@@ -40,7 +40,7 @@
             },
             onClose: function() {
                 console.log('modal closed');
-                checkSecret($('#secret').val());
+                checkSecret();
             },
             beforeClose: function() {
                 // here's goes some logic
