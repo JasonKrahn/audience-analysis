@@ -3,8 +3,9 @@
 import os
 import sys
 import json
+from functools import wraps
 from flask import Flask, request, Response, jsonify
-from flask import render_template, url_for, redirect
+from flask import render_template, url_for, redirect, abort
 #from flask_cors import CORS
 import requests
 import logging
@@ -27,20 +28,21 @@ from collections import deque
 # as stated in this SO
 # https://stackoverflow.com/questions/14810795/flask-url-for-generating-http-url-instead-of-https
 
-class ReverseProxied(object):
-    def __init__(self, app):
-        self.app = app
+def please_authenticate():
+    return Response('Attempt to access page without login', 401, {'WWWAuthenticate':'Basic realm="Login Required"'})
 
-    def __call__(self, environ, start_response):
-        scheme = environ.get('HTTP_X_FORWARDED_PROTO')
-        if scheme:
-            environ['wsgi.url_scheme'] = scheme
-        return self.app(environ, start_response)
+def requires_auth(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        secret = request.cookies.get("secret")
+        if not secret or secret != u.get_setting("app", "secret"):
+            return please_authenticate()
+        return f(*args, **kwargs)
+    return decorated
 
 log = logging.getLogger()
 
 app = Flask(__name__, static_url_path="/static")
-#app.wsgi_app = ReverseProxied(app.wsgi_app)
 #CORS(app)
 
 # Make the WSGI interface available at the top level so wfastcgi can get it.
@@ -57,9 +59,13 @@ redis_cache = cache.RedisCache()
 
 @app.route('/')
 def hello():
-    return redirect(url_for('serve_dashboard'))
+    if request.cookies.get("secret") == u.get_setting("app", "secret"):
+        return  redirect(url_for('serve_dashboard'))
+    else:
+        return redirect(url_for('serve_login'))
 
 @app.route("/camera", methods=["GET"])
+@requires_auth
 def serve_camera():
     return render_template("camera_index.htm")
 
@@ -68,6 +74,7 @@ def serve_login():
     return render_template("login.htm")
 
 @app.route("/dashboard",methods=["GET"] )
+@requires_auth
 def serve_dashboard():
     #send_from_directory(filename="dashboard/index.html")
     if "azurewebsites.net" in request.url_root:
@@ -77,18 +84,23 @@ def serve_dashboard():
     return render_template("dash_index.htm", camera_url = camera_url )
 
 @app.route('/api/report-token')
+@requires_auth
 def get_report_token():
     j = pbi.get_report_token()
     return j, 200, {'Content-Type': 'application/json'}
 
 @app.route('/api/dash-token')
+@requires_auth
 def get_dash_token():
+    if request.cookies.get("secret") != u.get_setting("app", "secret"):
+        return response_401()
     j = pbi.get_dashboard_token()
     return j, 200, {'Content-Type': 'application/json'}
 
 
 
 @app.route("/api/faces",methods=["GET", "POST"])
+@requires_auth
 def process_image():
 
     url = "https://" + u.get_setting("cognitive_services", "faceapi_uri") + "/face/v1.0/detect"
@@ -164,6 +176,7 @@ def process_image():
         return u.bad_message("Wrong content type, only octet-stream is supported")
 
 @app.route("/api/sessions",methods=["GET"])
+@requires_auth
 def get_sessions():
     sessions = list(redis_cache.get_sessions())
     cnt = redis_cache.get_session_count()
@@ -173,6 +186,7 @@ def get_sessions():
     return resp
 
 @app.route("/api/session-jpeg/<session_id>",methods=["GET"])
+@requires_auth
 def get_session_jpeg(session_id):
     thumb = redis_cache.get_session_thumbnail(session_id)
     if thumb is not None:
