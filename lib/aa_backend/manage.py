@@ -43,5 +43,5 @@ def update_docker():
 
     for c in cmd:
         log.debug("running command: " + c)
-        subprocess.Popen(c, shell=True)
+        subprocess.call(c, shell=True)
 
